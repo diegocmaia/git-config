@@ -1,0 +1,12 @@
+[init]
+    defaultBranch = main
+
+[alias]
+    st = status
+    cm = commit -m
+    ca = commit --amend
+    ct = checkout
+    ctb = checkout -b
+    plo = pull origin
+    po = push origin
+    pfo = push --force origin
