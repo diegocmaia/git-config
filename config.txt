@@ -5,13 +5,12 @@
   # Basic shortcuts
   co = checkout
   br = branch
-  ci = commit
   st = status
+  fe = fetch
   last = log -1 HEAD
 
   # Log and history
   lg = log --oneline --graph --decorate --all
-  lga = log --oneline --graph --decorate --all --author="$(git config user.name)"
   ll = log --pretty=format:'%C(yellow)%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
   # Diff and blame
@@ -22,26 +21,18 @@
   # Add and reset
   aa = add --all
   unstage = reset HEAD --
+  rsh = reset --hard HEAD
 
   # Cleanup
   clean = clean -fd
-  cleanall = '!git reset --hard && git clean -fd'
 
   # Rebase and fixes
   rc = rebase --continue
   ra = rebase --abort
   fixup = commit --fixup
-  squash = '!git rebase -i $(git merge-base main HEAD)'
-
-  # Rebase onto main
-  rmain = '!git fetch origin main && git rebase origin/main'
-  rmain-safe = '!git checkout -b backup-$(date +%s) && git fetch origin main && git rebase origin/main'
 
   # Branches
-  newb = '!f() { git checkout -b "$1" && git push -u origin "$1"; }; f'
-  nb = '!f() { git checkout -b "$1"; }; f'
-  nbm = '!f() { git fetch origin main && git checkout -b "$1" origin/main; }; f'
-  nbpr = '!f() { git checkout -b "$1" && git push -u origin "$1" && gh pr create --fill; }; f'
+  nb = checkout -b
 
   # Stash
   s = stash
@@ -49,15 +40,11 @@
   ss = stash save
   sl = stash list
 
-  # Syncing
-  p = push
-  pc = '!git push origin HEAD'
-  pu = '!git push -u origin $(git rev-parse --abbrev-ref HEAD)'
-  pf = push --force-with-lease
-  pff = push --force
-  pr = '!git push --force-with-lease'
-  up = '!git fetch && git rebase origin/$(git rev-parse --abbrev-ref HEAD)'
-  ps = '!git pull --rebase && git push'
+  # Commit
+  cm = commit -m
+  ca = commit --amend
 
-  # Rebase and push combined
-  syncmain = '!git fetch origin main && git rebase origin/main && git push --force-with-lease'
+  # Syncing
+  plo = pull origin
+  p = push
+  pff = push --force origin
